@@ -1,0 +1,10 @@
+{"level":"info","message":"Root endpoint accessed","service":"user-service"}
+{"level":"info","message":"::1 - - [15/Nov/2025:21:05:43 +0000] \"GET / HTTP/1.1\" 200 13 \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36 Edg/142.0.0.0\"","service":"user-service"}
+{"level":"info","message":"::1 - - [15/Nov/2025:21:05:43 +0000] \"GET /favicon.ico HTTP/1.1\" 404 150 \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36 Edg/142.0.0.0\"","service":"user-service"}
+{"level":"info","message":"Root endpoint accessed","service":"user-service"}
+{"level":"info","message":"::1 - - [17/Nov/2025:08:58:03 +0000] \"GET / HTTP/1.1\" 304 - \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36 Edg/142.0.0.0\"","service":"user-service"}
+{"level":"info","message":"::1 - - [17/Nov/2025:08:58:04 +0000] \"GET /favicon.ico HTTP/1.1\" 404 150 \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36 Edg/142.0.0.0\"","service":"user-service"}
+{"level":"info","message":"::1 - - [17/Nov/2025:08:58:12 +0000] \"GET /auth HTTP/1.1\" 404 143 \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36 Edg/142.0.0.0\"","service":"user-service"}
+{"level":"info","message":"::1 - - [17/Nov/2025:08:58:31 +0000] \"GET /api/auth HTTP/1.1\" 404 147 \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36 Edg/142.0.0.0\"","service":"user-service"}
+{"level":"info","message":"::1 - - [17/Nov/2025:12:34:20 +0000] \"GET /api/auth/sign-in HTTP/1.1\" 404 155 \"-\" \"HTTPie\"","service":"user-service"}
+{"level":"info","message":"::1 - - [17/Nov/2025:12:36:29 +0000] \"POST /api/auth/sign-in HTTP/1.1\" 200 30 \"-\" \"HTTPie\"","service":"user-service"}
