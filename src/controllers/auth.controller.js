@@ -1,16 +1,21 @@
 import logger from '../config/logger.js';
 import { authenticateUser } from '../services/auth.service.js';
+import { createUser } from '../services/auth.service.js';
 import { formatValidationErrors } from '../utils/format.js';
 import { signInSchema } from '../validations/auth.validation.js';
+import { signupSchema } from '../validations/auth.validation.js';
 import {cookies} from '../utils/cookies.js';
 import jwt from 'jsonwebtoken';
-
+import jwttoken from 'jsonwebtoken';
+import dotenv from 'dotenv';
+dotenv.config();
 export const signup = async(req, res, next) => {
 
  try{
     const validationResult = signupSchema.safeParse(req.body);
     if(!validationResult.success){
         return res.status(400).json({error: 'validation failed', details: formatValidationErrors(validationResult.error)});
+        console.log('JWT_SECRET:', process.env.JWT_SECRET);
     }
  
  
@@ -30,7 +35,7 @@ res.status(201).json({message: 'User registered successfully',
  }
  catch(e){
     logger.error('Error during signup validation', e);
-    if(e.message === 'User witgh this email already exists'){
+    if(e.message === 'User with this email already exists'){
         return res.status(409).json({error: e.message});
     }
  }

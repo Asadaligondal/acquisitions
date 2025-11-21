@@ -45,7 +45,7 @@ export const authenticateUser = async (email, password) => {
 export const createUser = async({name, email, password, role = 'user'}) => {
     try{
         // Simulate user creation and return user object
-        const existingUser = await db.select().from(users).where(eq(usersSync.email,email)).limit(1);
+        const existingUser = await db.select().from(users).where(eq(users.email,email)).limit(1);
         if(existingUser.length > 0){ throw new Error('User with this email already exists'); }
         const hashedPassword = await hashpassword(password);
         const [user] = await db.insert(users).values({
