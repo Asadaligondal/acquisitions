@@ -1,0 +1,78 @@
+version: '3.8'
+
+services:
+  # Neon Local Proxy for Development
+  neon-local:
+    image: neondatabase/neon_local:latest
+
+    platform: linux/amd64
+    container_name: neon-local-proxy
+    env_file:
+      - .env.development
+    ports:
+      - "5432:5432"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - neon-network
+    restart: unless-stopped
+
+  # Backing PostgreSQL for Neon Local
+  postgres:
+    image: postgres:16-alpine
+    container_name: neon-postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+    ports:
+      - "5433:5432"
+    networks:
+      - neon-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # Application Service
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: acquisitions-app-dev
+    environment:
+      - JWT_SECRET=dev_jwt_secret_change_in_production_123456789
+      - NODE_ENV=development
+    env_file:
+      - .env.development
+      
+    ports:
+      - "3000:3000"
+    volumes:
+      # Mount source code for hot-reloading
+      - ./src:/app/src
+      - ./logs:/app/logs
+      # Prevent overwriting node_modules
+      - /app/node_modules
+    depends_on:
+      postgres:
+        condition: service_healthy
+      neon-local:
+        condition: service_started
+    networks:
+      - neon-network
+    restart: unless-stopped
+    command: npm run dev
+
+networks:
+  neon-network:
+    driver: bridge
+
+volumes:
+  postgres-data:

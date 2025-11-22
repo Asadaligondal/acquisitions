@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  # Application Service - Production
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: acquisitions-app-prod
+    env_file:
+      - .env.production
+    ports:
+      - "3000:3000"
+    volumes:
+      # Only mount logs in production
+      - ./logs:/app/logs
+    restart: always
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:3000/health', (r) => {process.exit(r.statusCode === 200 ? 0 : 1)})"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
