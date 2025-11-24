@@ -4,6 +4,7 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 import authRoutes from './routes/auth.routes.js';
+import userRoutes from './routes/users.route.js';
 import cors from 'cors';    
 import securityMiddleware from './middleware/security.middleware.js';
 const app = express();
@@ -32,5 +33,6 @@ app.get('/api', (req, res) => {
     res.status(200).json({message: 'API is running smoothly'})});
 
 app.use('/api/auth', authRoutes);
+app.use('/api/users', userRoutes);
 
 export default app
