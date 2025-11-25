@@ -23,11 +23,13 @@ A RESTful API for user authentication built with Node.js, Express.js, Drizzle OR
 ## 🏗️ Architecture
 
 ### Development Environment
+
 - **Neon Local**: PostgreSQL proxy running in Docker for local development
 - **PostgreSQL 16**: Backing database for Neon Local
 - **Application**: Node.js app with hot-reloading
 
 ### Production Environment
+
 - **Neon Cloud**: Serverless PostgreSQL database
 - **Application**: Optimized Node.js app
 
@@ -53,6 +55,7 @@ cp .env.development .env
 ```
 
 Edit `.env` and update the following variables:
+
 - `JWT_SECRET`: A secure secret for JWT tokens
 - `ARCJET_KEY`: Your Arcjet API key (get from https://arcjet.com)
 
@@ -67,6 +70,7 @@ cp .env.production .env.prod
 ```
 
 Edit `.env.prod` and update:
+
 - `DATABASE_URL`: Your Neon Cloud connection string from https://console.neon.tech
 - `JWT_SECRET`: A strong secret (generate with `openssl rand -base64 32`)
 - `ARCJET_KEY`: Your production Arcjet API key
@@ -78,6 +82,7 @@ Edit `.env.prod` and update:
 ### Start Development Environment
 
 This command starts:
+
 - Neon Local proxy
 - PostgreSQL database
 - Application with hot-reloading
@@ -187,6 +192,7 @@ npm start
 ### Authentication
 
 #### Sign Up
+
 ```http
 POST /api/auth/sign-up
 Content-Type: application/json
@@ -200,6 +206,7 @@ Content-Type: application/json
 ```
 
 #### Sign In
+
 ```http
 POST /api/auth/sign-in
 Content-Type: application/json
@@ -211,11 +218,13 @@ Content-Type: application/json
 ```
 
 #### Sign Out
+
 ```http
 POST /api/auth/sign-out
 ```
 
 ### Health Check
+
 ```http
 GET /health
 ```
@@ -226,15 +235,15 @@ GET /health
 
 ### Users Table
 
-| Column     | Type      | Constraints           |
-|------------|-----------|-----------------------|
-| id         | serial    | PRIMARY KEY           |
-| name       | varchar   | NOT NULL              |
-| email      | varchar   | NOT NULL, UNIQUE      |
-| password   | varchar   | NOT NULL (hashed)     |
-| role       | varchar   | NOT NULL, DEFAULT 'user' |
-| createdAt  | timestamp | NOT NULL, DEFAULT now() |
-| updatedAt  | timestamp | NOT NULL, DEFAULT now() |
+| Column    | Type      | Constraints              |
+| --------- | --------- | ------------------------ |
+| id        | serial    | PRIMARY KEY              |
+| name      | varchar   | NOT NULL                 |
+| email     | varchar   | NOT NULL, UNIQUE         |
+| password  | varchar   | NOT NULL (hashed)        |
+| role      | varchar   | NOT NULL, DEFAULT 'user' |
+| createdAt | timestamp | NOT NULL, DEFAULT now()  |
+| updatedAt | timestamp | NOT NULL, DEFAULT now()  |
 
 ---
 
@@ -242,23 +251,25 @@ GET /health
 
 ### Required Variables
 
-| Variable      | Description                          | Example                                      |
-|---------------|--------------------------------------|----------------------------------------------|
-| NODE_ENV      | Environment mode                     | `development` or `production`                |
-| PORT          | Server port                          | `3000`                                       |
-| DATABASE_URL  | Database connection string           | See below                                    |
-| JWT_SECRET    | Secret for JWT token signing         | `your_secret_key`                            |
-| ARCJET_KEY    | Arcjet API key for rate limiting     | `ajkey_*****`                                |
-| LOG_LEVEL     | Logging level                        | `debug`, `info`, `warn`, `error`             |
+| Variable     | Description                      | Example                          |
+| ------------ | -------------------------------- | -------------------------------- |
+| NODE_ENV     | Environment mode                 | `development` or `production`    |
+| PORT         | Server port                      | `3000`                           |
+| DATABASE_URL | Database connection string       | See below                        |
+| JWT_SECRET   | Secret for JWT token signing     | `your_secret_key`                |
+| ARCJET_KEY   | Arcjet API key for rate limiting | `ajkey_*****`                    |
+| LOG_LEVEL    | Logging level                    | `debug`, `info`, `warn`, `error` |
 
 ### Database URLs
 
 **Development (Neon Local):**
+
 ```
 postgres://neondb_owner:neondb_password@neon-local:5432/neondb
 ```
 
 **Production (Neon Cloud):**
+
 ```
 postgres://user:password@ep-xyz.region.aws.neon.tech/dbname?sslmode=require
 ```
@@ -267,16 +278,16 @@ postgres://user:password@ep-xyz.region.aws.neon.tech/dbname?sslmode=require
 
 ## 📦 Scripts
 
-| Command            | Description                              |
-|--------------------|------------------------------------------|
-| `npm run dev`      | Start development server with hot-reload |
-| `npm start`        | Start production server                  |
-| `npm run lint`     | Run ESLint                               |
-| `npm run lint:fix` | Fix ESLint errors                        |
-| `npm run format`   | Format code with Prettier                |
-| `npm run db:generate` | Generate database migrations          |
-| `npm run db:migrate`  | Apply database migrations             |
-| `npm run db:studio`   | Open Drizzle Studio                   |
+| Command               | Description                              |
+| --------------------- | ---------------------------------------- |
+| `npm run dev`         | Start development server with hot-reload |
+| `npm start`           | Start production server                  |
+| `npm run lint`        | Run ESLint                               |
+| `npm run lint:fix`    | Fix ESLint errors                        |
+| `npm run format`      | Format code with Prettier                |
+| `npm run db:generate` | Generate database migrations             |
+| `npm run db:migrate`  | Apply database migrations                |
+| `npm run db:studio`   | Open Drizzle Studio                      |
 
 ---
 
@@ -298,6 +309,7 @@ postgres://user:password@ep-xyz.region.aws.neon.tech/dbname?sslmode=require
 ## 🌐 Neon Local vs Neon Cloud
 
 ### Neon Local (Development)
+
 - Runs in Docker using `neondatabase/neon-proxy`
 - Provides ephemeral PostgreSQL instances
 - Fast local development without cloud dependency
@@ -305,6 +317,7 @@ postgres://user:password@ep-xyz.region.aws.neon.tech/dbname?sslmode=require
 - Connection: `postgres://neondb_owner:neondb_password@neon-local:5432/neondb`
 
 ### Neon Cloud (Production)
+
 - Serverless PostgreSQL in the cloud
 - Auto-scaling and branching
 - Production-grade reliability
@@ -318,6 +331,7 @@ postgres://user:password@ep-xyz.region.aws.neon.tech/dbname?sslmode=require
 ### Deploy with Docker
 
 1. Build the production image:
+
    ```bash
    docker build -t acquisitions-app .
    ```
@@ -335,6 +349,7 @@ postgres://user:password@ep-xyz.region.aws.neon.tech/dbname?sslmode=require
 ### Deploy to Cloud Platforms
 
 #### Render / Railway / Fly.io
+
 1. Connect your GitHub repository
 2. Set environment variables in the platform dashboard
 3. Use `Dockerfile` for deployment
@@ -342,6 +357,7 @@ postgres://user:password@ep-xyz.region.aws.neon.tech/dbname?sslmode=require
 5. Set start command: `node src/index.js`
 
 #### AWS / GCP / Azure
+
 1. Push Docker image to container registry (ECR, GCR, ACR)
 2. Deploy using container services (ECS, Cloud Run, Container Instances)
 3. Set environment variables via platform configuration
@@ -409,11 +425,13 @@ This project includes comprehensive GitHub Actions workflows for automated testi
 **Triggers:** Push and pull requests to `main` and `staging` branches
 
 **What it does:**
+
 - Runs ESLint code quality checks
 - Validates code formatting with Prettier
 - Provides detailed error reporting with fix suggestions
 
 **Usage:**
+
 ```bash
 # Fix ESLint issues locally
 npm run lint:fix
@@ -427,24 +445,28 @@ npm run format
 **Triggers:** Push and pull requests to `main` and `staging` branches
 
 **What it does:**
+
 - Runs the complete test suite with Jest
 - Generates code coverage reports
 - Uploads coverage artifacts (30-day retention)
 - Provides detailed test result summaries
 
 **Environment Variables:**
+
 - `NODE_ENV=test`
 - `NODE_OPTIONS=--experimental-vm-modules` (for ES modules support)
 - Test database and JWT secrets configured
 
 ### 🐳 Docker Build and Push (`docker-build-and-push.yml`)
 
-**Triggers:** 
+**Triggers:**
+
 - Push to `main` branch
 - Version tags (`v*`)
 - Pull requests to `main` (build only, no push)
 
 **What it does:**
+
 - Builds multi-platform Docker images (linux/amd64, linux/arm64)
 - Pushes images to Docker Hub (requires secrets)
 - Generates semantic version tags
@@ -452,12 +474,14 @@ npm run format
 - Provides build summaries and usage examples
 
 **Required Secrets:**
+
 ```yaml
 DOCKERHUB_USERNAME: your-dockerhub-username
 DOCKERHUB_TOKEN: your-dockerhub-access-token
 ```
 
 **Generated Tags:**
+
 - `latest` (main branch)
 - `v1.0.0`, `v1.0`, `v1` (semver tags)
 - `main-abc1234-20241201` (branch-commit-date)
@@ -481,12 +505,14 @@ DOCKERHUB_TOKEN: your-dockerhub-access-token
 ### 📊 Workflow Status
 
 You can monitor workflow status in the Actions tab of your repository. Each workflow provides:
+
 - ✅ Success/failure status
 - 📊 Test coverage information
 - 🐳 Docker image details and pull commands
 - 🔍 Detailed logs and error reporting
 
 **Example Docker Usage:**
+
 ```bash
 # Pull the latest image
 docker pull your-username/acquisitions-api:latest
@@ -528,6 +554,7 @@ ISC
 ## 📞 Support
 
 For issues and questions:
+
 - GitHub Issues: https://github.com/Asadaligondal/acquisitions/issues
 - Neon Documentation: https://neon.tech/docs
 - Neon Local Documentation: https://neon.tech/docs/local/neon-local

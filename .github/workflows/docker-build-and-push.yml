@@ -9,7 +9,7 @@ on:
 
 env:
   DOCKER_REGISTRY: docker.io
-  IMAGE_NAME: acquisitions-api
+  IMAGE_NAME: kubernetes-demo-api
 
 jobs:
   build-and-push:
@@ -17,7 +17,7 @@ jobs:
     permissions:
       contents: read
       packages: write
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -78,7 +78,7 @@ jobs:
         run: |
           echo "## 🐳 Docker Build Results" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          
+
           if [ "${{ job.status }}" == "success" ]; then
             echo "✅ **Docker build completed successfully!**" >> $GITHUB_STEP_SUMMARY
             echo "" >> $GITHUB_STEP_SUMMARY

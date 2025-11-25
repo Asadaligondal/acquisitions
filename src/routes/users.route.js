@@ -1,5 +1,10 @@
 import express from 'express';
-import { fetchAllUsers, fetchUserById, updateUserById, deleteUserById } from '../controllers/users.controller.js';
+import {
+  fetchAllUsers,
+  fetchUserById,
+  updateUserById,
+  deleteUserById,
+} from '../controllers/users.controller.js';
 // import { authMiddleware } from '../middleware/auth.middleware.js'; // Uncomment when auth middleware is available
 
 const router = express.Router();

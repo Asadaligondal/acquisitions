@@ -4,7 +4,9 @@ import { signup } from '../controllers/auth.controller.js';
 
 router.post('/sign-up', signup);
 router.post('/sign-in', (req, res) => {
-    res.send('POST api/auth/sign-in response, working perfectlyy')});
+  res.send('POST api/auth/sign-in response, working perfectlyy');
+});
 router.post('/sign-out', (req, res) => {
-    res.send('POST api/auth/sign-out response')});
+  res.send('POST api/auth/sign-out response');
+});
 export default router;
