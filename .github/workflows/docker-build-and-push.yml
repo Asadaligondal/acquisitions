@@ -9,7 +9,7 @@ on:
 
 env:
   DOCKER_REGISTRY: docker.io
-  IMAGE_NAME: kubernetes-demo-api
+  IMAGE_NAME: acquisitions-app
 
 jobs:
   build-and-push:
