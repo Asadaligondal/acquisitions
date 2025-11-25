@@ -400,6 +400,106 @@ acquisitions/
 
 ---
 
+## 🚀 CI/CD Pipelines
+
+This project includes comprehensive GitHub Actions workflows for automated testing, code quality checks, and deployment:
+
+### 🔍 Lint and Format (`lint-and-format.yml`)
+
+**Triggers:** Push and pull requests to `main` and `staging` branches
+
+**What it does:**
+- Runs ESLint code quality checks
+- Validates code formatting with Prettier
+- Provides detailed error reporting with fix suggestions
+
+**Usage:**
+```bash
+# Fix ESLint issues locally
+npm run lint:fix
+
+# Fix formatting issues locally
+npm run format
+```
+
+### 🧪 Tests (`tests.yml`)
+
+**Triggers:** Push and pull requests to `main` and `staging` branches
+
+**What it does:**
+- Runs the complete test suite with Jest
+- Generates code coverage reports
+- Uploads coverage artifacts (30-day retention)
+- Provides detailed test result summaries
+
+**Environment Variables:**
+- `NODE_ENV=test`
+- `NODE_OPTIONS=--experimental-vm-modules` (for ES modules support)
+- Test database and JWT secrets configured
+
+### 🐳 Docker Build and Push (`docker-build-and-push.yml`)
+
+**Triggers:** 
+- Push to `main` branch
+- Version tags (`v*`)
+- Pull requests to `main` (build only, no push)
+
+**What it does:**
+- Builds multi-platform Docker images (linux/amd64, linux/arm64)
+- Pushes images to Docker Hub (requires secrets)
+- Generates semantic version tags
+- Runs security scans with Trivy
+- Provides build summaries and usage examples
+
+**Required Secrets:**
+```yaml
+DOCKERHUB_USERNAME: your-dockerhub-username
+DOCKERHUB_TOKEN: your-dockerhub-access-token
+```
+
+**Generated Tags:**
+- `latest` (main branch)
+- `v1.0.0`, `v1.0`, `v1` (semver tags)
+- `main-abc1234-20241201` (branch-commit-date)
+
+### 🔧 Setup Instructions
+
+1. **Configure Docker Hub Secrets:**
+   - Go to your repository Settings → Secrets and variables → Actions
+   - Add `DOCKERHUB_USERNAME` with your Docker Hub username
+   - Add `DOCKERHUB_TOKEN` with your Docker Hub access token
+
+2. **Update Docker Image Name:**
+   - Edit `docker-build-and-push.yml`
+   - Change `IMAGE_NAME: acquisitions-api` to your preferred name
+
+3. **Branch Protection (Recommended):**
+   - Require status checks to pass before merging
+   - Include: "lint-and-format" and "test" workflows
+   - Require branches to be up to date before merging
+
+### 📊 Workflow Status
+
+You can monitor workflow status in the Actions tab of your repository. Each workflow provides:
+- ✅ Success/failure status
+- 📊 Test coverage information
+- 🐳 Docker image details and pull commands
+- 🔍 Detailed logs and error reporting
+
+**Example Docker Usage:**
+```bash
+# Pull the latest image
+docker pull your-username/acquisitions-api:latest
+
+# Run the container
+docker run -p 3000:3000 \
+  -e DATABASE_URL="your-database-url" \
+  -e JWT_SECRET="your-jwt-secret" \
+  your-username/acquisitions-api:latest
+```
+
+---
+
 ## 🤝 Contributing
 
 1. Fork the repository
