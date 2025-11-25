@@ -40,12 +40,10 @@ export const securityMiddleware = async (req, res, next) => {
         path: req.path,
         method: req.method,
       });
-      return res
-        .status(403)
-        .json({
-          error: 'Malicious request blocked',
-          message: 'Your request has been blocked due to security concerns.',
-        });
+      return res.status(403).json({
+        error: 'Malicious request blocked',
+        message: 'Your request has been blocked due to security concerns.',
+      });
     }
     if (decision.isDenied && decision.reason.isRateLimit()) {
       logger.warn('Blocked bot request', {
@@ -53,13 +51,11 @@ export const securityMiddleware = async (req, res, next) => {
         userAgent: req.get('User-Agent'),
         path: req.path,
       });
-      return res
-        .status(403)
-        .json({
-          error: 'Access denied for bots',
-          message:
-            'Your request has been identified as coming from a bot and has been blocked.',
-        });
+      return res.status(403).json({
+        error: 'Access denied for bots',
+        message:
+          'Your request has been identified as coming from a bot and has been blocked.',
+      });
     }
     next();
   } catch (e) {
