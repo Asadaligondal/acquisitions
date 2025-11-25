@@ -79,3 +79,15 @@
 {"level":"info","message":"::1 - - [21/Nov/2025:19:05:33 +0000] \"GET /health HTTP/1.1\" 200 54 \"-\" \"HTTPie\"","service":"user-service"}
 {"ip":"::1","level":"warn","message":"Blocked bot request","path":"/health","service":"user-service","userAgent":"HTTPie"}
 {"ip":"::1","level":"warn","message":"Blocked bot request","path":"/health","service":"user-service","userAgent":"HTTPie"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [25/Nov/2025:13:35:06 +0000] \"GET /health HTTP/1.1\" 200 54 \"-\" \"-\"","service":"user-service"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [25/Nov/2025:13:35:06 +0000] \"GET /api HTTP/1.1\" 200 37 \"-\" \"-\"","service":"user-service"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [25/Nov/2025:13:35:06 +0000] \"GET /nonexistent HTTP/1.1\" 404 70 \"-\" \"-\"","service":"user-service"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [25/Nov/2025:13:38:25 +0000] \"GET /health HTTP/1.1\" 200 54 \"-\" \"-\"","service":"user-service"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [25/Nov/2025:13:38:25 +0000] \"GET /api HTTP/1.1\" 200 37 \"-\" \"-\"","service":"user-service"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [25/Nov/2025:13:38:25 +0000] \"GET /nonexistent HTTP/1.1\" 404 71 \"-\" \"-\"","service":"user-service"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [25/Nov/2025:13:41:11 +0000] \"GET /health HTTP/1.1\" 200 54 \"-\" \"-\"","service":"user-service"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [25/Nov/2025:13:41:12 +0000] \"GET /api HTTP/1.1\" 200 37 \"-\" \"-\"","service":"user-service"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [25/Nov/2025:13:41:12 +0000] \"GET /nonexistent HTTP/1.1\" 404 70 \"-\" \"-\"","service":"user-service"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [25/Nov/2025:13:44:51 +0000] \"GET /health HTTP/1.1\" 200 123 \"-\" \"-\"","service":"user-service"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [25/Nov/2025:13:44:51 +0000] \"GET /api HTTP/1.1\" 200 37 \"-\" \"-\"","service":"user-service"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [25/Nov/2025:13:44:51 +0000] \"GET /nonexistent HTTP/1.1\" 404 70 \"-\" \"-\"","service":"user-service"}

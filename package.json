@@ -10,7 +10,9 @@
     "#routes/*": "./src/routes/*",
     "#utils/*": "./src/utils/*",
     "#services/*": "./src/services/*",
-    "#middlewares/*": "./src/middlewares/*"
+    "#middlewares/*": "./src/middlewares/*",
+    "#src/*": "./src/*",
+    "#test": "NODE_OPTIONS=--experimental-vm-modules jest"
   },
   "type": "module",
   "scripts": {
@@ -23,7 +25,10 @@
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:studio": "drizzle-kit studio",
-    "dev:docker": "powershell ./scripts/dev.ps1"
+    "dev:docker": "powershell ./scripts/dev.ps1",
+    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --no-cache",
+    "test:watch": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --watch --no-cache",
+    "test:coverage": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --coverage --no-cache"
   },
   "repository": {
     "type": "git",
@@ -54,10 +59,14 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
+    "@jest/globals": "^30.2.0",
+    "cross-env": "^10.1.0",
     "drizzle-kit": "^0.31.7",
     "eslint": "^9.39.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
-    "prettier": "^3.6.2"
+    "jest": "^30.2.0",
+    "prettier": "^3.6.2",
+    "supertest": "^7.1.4"
   }
 }

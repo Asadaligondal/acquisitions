@@ -26,7 +26,13 @@ app.get('/', (req, res) => {
   res.status(200).send('Hello, World!');
 });
 app.get('/health', (req, res) => {
-  res.status(200).json({ status: 'OK', timestamp: new Date().toISOString() });
+    res.status(200).json({
+        status: 'OK',
+        timestamp: new Date().toISOString(),
+        uptime: process.uptime(), // ✅ Add this line
+        service: 'acquisition-service',
+        version: '1.0.0'
+    });
 });
 
 app.get('/api', (req, res) => {
@@ -34,5 +40,6 @@ app.get('/api', (req, res) => {
 
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
+app.use((req, res) => {res.status(404).json({ error: 'Not Found', message: 'The requested resource was not found' });});
 
 export default app
